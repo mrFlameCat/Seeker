@@ -1,17 +1,10 @@
 """This is program for search."""
 
 
-#import os
 import tkinter as tk
 from tkinter import ttk
-from tkinter import filedialog
-import time
 import threading
 import fun
-
-
-
-#path = 'C:\MY FILES\Dev\Python\Обучение\training dir'
 
 
 ##################################### logical block ###################################
@@ -24,6 +17,7 @@ proccess_flag = False
 
 
 def start_function():
+    """This function started search"""
     fun.update_label(lbl_wait, 'Please, wait...')
     fun.show_progress(progressbar)
     threading.Thread(target=main_function).start()
@@ -84,7 +78,7 @@ root.title("Seeker")
 root.geometry("1000x750+100+50")
 check_subfolders = tk.IntVar(value=1)
 check_reg = tk.IntVar(value=1)
-bar = tk.IntVar   
+var_for_bar = tk.IntVar
 r_dirfiles = tk.IntVar(value=3)
 
 
@@ -136,17 +130,18 @@ r_btn_in_both.place(relx=0.25, rely=0.4)
 r_btn_in_dir.place(relx=0.25, rely=0.5)
 r_btn_in_files.place(relx=0.25, rely=0.6)
 
-btn_browser = tk.Button(top_frame, text="Browse", font=("Arial, 14"), command=lambda: fun.select_path(where))
+btn_browser = tk.Button(top_frame, text="Browse", font=("Arial, 14"),
+                         command=lambda: fun.select_path(where))
 btn_browser.place(relx=0.875, rely=0.1, relheight=0.07, relwidth=0.1)
 
 
-lbl_results = tk.Label(bottom_frame, font=("Arial, 14"))
+lbl_results = tk.Label(bottom_frame, font="Arial, 14")
 lbl_results.place(relheight=0.1, relwidth=0.2, rely=0.89, relx=0.78)
 
-lbl_wait=tk.Label(bottom_frame, font=("Arial, 14"))
+lbl_wait=tk.Label(bottom_frame, font="Arial, 14")
 lbl_wait.place(relheight=0.1, relwidth=0.22, rely=0.89, relx=0.02)
 
-progressbar = ttk.Progressbar(bottom_frame, orient='horizontal',variable=bar)
+progressbar = ttk.Progressbar(bottom_frame, orient='horizontal', variable=var_for_bar)
 
 root.mainloop()
 

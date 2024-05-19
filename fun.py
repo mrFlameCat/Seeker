@@ -1,6 +1,5 @@
 """ Module contains functions for this program"""
 import os
-import time
 import tkinter as tk
 from tkinter import filedialog
 
