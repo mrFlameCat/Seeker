@@ -1,4 +1,4 @@
-"""This is program for search."""
+"""This is program for search. Udate 19.05.2024 16:37"""
 
 
 import tkinter as tk
