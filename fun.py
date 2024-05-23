@@ -8,7 +8,7 @@ def insert_results(widget, the_list):
     """This function take text widget and insert results of searching"""
     widget.delete("1.0", "end")
     for result in the_list:
-        widget.insert("end", result + '\n')
+        widget.insert("end", result.get_properties() + '\n\n')
 
 
 def read_entry(entry_widget):

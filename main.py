@@ -4,7 +4,9 @@
 import tkinter as tk
 from tkinter import ttk
 import threading
+import os
 import fun
+import cls
 
 
 ##################################### logical block ###################################
@@ -35,6 +37,11 @@ def main_function():
     processed_list.clear()
     results_list.clear()
     path = fun.read_entry(where)
+    if not os.path.exists(path):
+        text_field.insert("end", "Path don't exists!")
+        fun.hide_progress(progressbar)
+        fun.update_label(lbl_wait, 'Done')
+        return
     target = fun.read_entry(what)
 
     if check_subfolders.get() == 1 and r_dirfiles.get() == 3:
@@ -61,7 +68,9 @@ def main_function():
     for i in processed_list:
         if target in i:
             count += 1
-            results_list.append(i)
+            new_obj = cls.CreatorOfObjects(i, results_list)
+            new_obj.create_objects()
+
     fun.insert_results(text_field, results_list)
     fun.reset_results_numb(lbl_results, count)
     print(f"Processed: {len(processed_list)}")
