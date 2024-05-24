@@ -1,9 +1,9 @@
-"Module contains classes for this program"
+"Module contains classes for program Seeker."
 import os
 import time
 
 class ObjectDir():
-    """Some docstring"""
+    """Class describes a directory."""
 
     def __init__(self, path, size, changed):
         self.path = path
@@ -12,30 +12,30 @@ class ObjectDir():
         self.type = "directory"
 
     def get_path(self):
-        """Some docstring"""
+        """Return full path directory."""
         return self.path
 
     def get_size(self):
-        """Some docstring"""
+        """Return size directory."""
         return self.size
 
     def get_changed(self):
-        """Some docstring"""
+        """Return date of last changes directory."""
         return self.changed
 
     def get_type(self):
-        """Some docstring"""
+        """Return type of object: string 'diretory'."""
         return self.type
 
     def get_properties(self):
-        """Some docstring"""
+        """Return type, path,size and changes together."""
         properties = f"""Type: {self.type}, path: {self.path},
         size: {self.size}MB, changed: {self.changed}"""
         return properties
 
 
 class ObjectFile():
-    """Some docstring"""
+    """Class describes a file."""
 
     def __init__(self, path, size, changed):
         self.path = path
@@ -44,23 +44,23 @@ class ObjectFile():
         self.type = "file"
 
     def get_path(self):
-        """Some docstring"""
+        """Return full path of file."""
         return self.path
 
     def get_size(self):
-        """Some docstring"""
+        """Return a file's size."""
         return self.size
 
     def get_changed(self):
-        """Some docstring"""
+        """Return date of last changes."""
         return self.changed
 
     def get_type(self):
-        """Some docstring"""
+        """Return type of object: string 'file'."""
         return self.type
 
     def get_properties(self):
-        """Some docstring"""
+        """Return type, path,size and changes together."""
         properties = f"""Type: {self.type}, path: {self.path},
         size: {self.size}MB, changed: {self.changed}"""
         return properties
@@ -68,16 +68,15 @@ class ObjectFile():
 
 
 class CreatorOfObjects():
-    """Some docstring"""
+    """Class create an object of directories and files"""
 
     def __init__(self, path, main_list):
-        """Some docstring"""
         self.path = path
         self.main_list = main_list
 
 
     def get_dir_size(self):
-        """Some docstring"""
+        """Folder size calculation."""
         total_size = 0
         for dirpath, dirnames, filenames in os.walk(self.path):
             for file in filenames:
@@ -88,7 +87,7 @@ class CreatorOfObjects():
 
 
     def create_objects(self):
-        """Some docstring"""
+        """This method directly creates objects."""
 
         if os.path.isdir(self.path):
             timestamp_direct = os.path.getmtime(self.path)
