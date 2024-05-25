@@ -60,7 +60,7 @@ def main_function():
         fun.single_file(path, processed_list)
     
 
-    if check_reg.get() == 1:
+    if check_case.get() == 1:
         target = target.lower()
         for index, item in enumerate(processed_list):
             processed_list[index] = item.lower()
@@ -86,7 +86,7 @@ root = tk.Tk()
 root.title("Seeker")
 root.geometry("1000x750+100+50")
 check_subfolders = tk.IntVar(value=1)
-check_reg = tk.IntVar(value=1)
+check_case = tk.IntVar(value=1)
 var_for_bar = tk.IntVar
 r_dirfiles = tk.IntVar(value=3)
 
@@ -124,9 +124,9 @@ checkbtn_subfolders = tk.Checkbutton(top_frame, text='Search with subfolders',
                                      variable=check_subfolders)
 checkbtn_subfolders.place(relx=0.01, rely=0.4)
 
-checkbtn_register = tk.Checkbutton(top_frame, text='Ignore register',
-                                     variable=check_reg)
-checkbtn_register.place(relx=0.01, rely=0.5)
+checkbtn_case = tk.Checkbutton(top_frame, text='Case-insensitive',
+                                     variable=check_case)
+checkbtn_case.place(relx=0.01, rely=0.5)
 
 
 r_btn_in_both = ttk.Radiobutton(top_frame, text='Search folders and files',
@@ -151,6 +151,8 @@ lbl_wait=tk.Label(bottom_frame, font="Arial, 14")
 lbl_wait.place(relheight=0.1, relwidth=0.22, rely=0.89, relx=0.02)
 
 progressbar = ttk.Progressbar(bottom_frame, orient='horizontal', variable=var_for_bar)
+
+root.bind('<Return>', lambda event: fun.pressing_enter(event, btn_start))
 
 root.mainloop()
 

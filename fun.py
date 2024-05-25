@@ -97,3 +97,8 @@ def hide_progress(my_progressbar):
     """This function stop and hide a progressbar"""
     my_progressbar.stop()
     my_progressbar.place_forget()
+
+
+def pressing_enter(event, some_btn):
+    """This function is to launch the application by pressing the enter button"""
+    some_btn.invoke()

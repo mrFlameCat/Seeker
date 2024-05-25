@@ -1,6 +1,7 @@
 "Module contains classes for program Seeker."
 import os
 import time
+import fun
 
 class ObjectDir():
     """Class describes a directory."""
