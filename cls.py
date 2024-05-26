@@ -10,7 +10,7 @@ class ObjectDir():
         self.path = path
         self.size = size
         self.changed = changed
-        self.type = "directory"
+        self.type = "Directory"
 
     def get_path(self):
         """Return full path directory."""
@@ -30,8 +30,11 @@ class ObjectDir():
 
     def get_properties(self):
         """Return type, path,size and changes together."""
-        properties = f"""Type: {self.type}, path: {self.path},
-        size: {self.size}MB, changed: {self.changed}"""
+        properties = (
+            f"{self.type}\n"
+            f"path: {self.path}\n"
+            f"size: {self.size}MB, changed: {self.changed}"
+        )
         return properties
 
 
@@ -42,7 +45,7 @@ class ObjectFile():
         self.path = path
         self.size = size
         self.changed = changed
-        self.type = "file"
+        self.type = "File"
 
     def get_path(self):
         """Return full path of file."""
@@ -62,8 +65,11 @@ class ObjectFile():
 
     def get_properties(self):
         """Return type, path,size and changes together."""
-        properties = f"""Type: {self.type}, path: {self.path},
-        size: {self.size}MB, changed: {self.changed}"""
+        properties = (
+            f"{self.type}\n"
+            f"path: {self.path}\n"
+            f"size: {self.size}MB, changed: {self.changed}"
+        )
         return properties
 
 
