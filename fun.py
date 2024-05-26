@@ -1,6 +1,5 @@
 """ Module contains functions for this program"""
 import os
-import time
 import tkinter as tk
 from tkinter import filedialog
 
@@ -9,7 +8,7 @@ def insert_results(widget, the_list):
     """This function take text widget and insert results of searching"""
     widget.delete("1.0", "end")
     for result in the_list:
-        widget.insert("end", result + '\n')
+        widget.insert("end", result.get_properties() + '\n\n')
 
 
 def read_entry(entry_widget):
@@ -98,3 +97,8 @@ def hide_progress(my_progressbar):
     """This function stop and hide a progressbar"""
     my_progressbar.stop()
     my_progressbar.place_forget()
+
+
+def pressing_enter(event, some_btn):
+    """This function is to launch the application by pressing the enter button"""
+    some_btn.invoke()

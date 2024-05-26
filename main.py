@@ -1,17 +1,12 @@
-"""This is program for search."""
+"""This is program for search. Udate 19.05.2024 16:37"""
 
 
-#import os
 import tkinter as tk
 from tkinter import ttk
-from tkinter import filedialog
-import time
 import threading
+import os
 import fun
-
-
-
-#path = 'C:\MY FILES\Dev\Python\Обучение\training dir'
+import cls
 
 
 ##################################### logical block ###################################
@@ -24,6 +19,7 @@ proccess_flag = False
 
 
 def start_function():
+    """This function started search"""
     fun.update_label(lbl_wait, 'Please, wait...')
     fun.show_progress(progressbar)
     threading.Thread(target=main_function).start()
@@ -41,6 +37,11 @@ def main_function():
     processed_list.clear()
     results_list.clear()
     path = fun.read_entry(where)
+    if not os.path.exists(path):
+        text_field.insert("end", "Path don't exists!")
+        fun.hide_progress(progressbar)
+        fun.update_label(lbl_wait, 'Done')
+        return
     target = fun.read_entry(what)
 
     if check_subfolders.get() == 1 and r_dirfiles.get() == 3:
@@ -59,7 +60,7 @@ def main_function():
         fun.single_file(path, processed_list)
     
 
-    if check_reg.get() == 1:
+    if check_case.get() == 1:
         target = target.lower()
         for index, item in enumerate(processed_list):
             processed_list[index] = item.lower()
@@ -67,7 +68,9 @@ def main_function():
     for i in processed_list:
         if target in i:
             count += 1
-            results_list.append(i)
+            new_obj = cls.CreatorOfObjects(i, results_list)
+            new_obj.create_objects()
+
     fun.insert_results(text_field, results_list)
     fun.reset_results_numb(lbl_results, count)
     print(f"Processed: {len(processed_list)}")
@@ -83,8 +86,8 @@ root = tk.Tk()
 root.title("Seeker")
 root.geometry("1000x750+100+50")
 check_subfolders = tk.IntVar(value=1)
-check_reg = tk.IntVar(value=1)
-bar = tk.IntVar   
+check_case = tk.IntVar(value=1)
+var_for_bar = tk.IntVar
 r_dirfiles = tk.IntVar(value=3)
 
 
@@ -121,9 +124,9 @@ checkbtn_subfolders = tk.Checkbutton(top_frame, text='Search with subfolders',
                                      variable=check_subfolders)
 checkbtn_subfolders.place(relx=0.01, rely=0.4)
 
-checkbtn_register = tk.Checkbutton(top_frame, text='Ignore register',
-                                     variable=check_reg)
-checkbtn_register.place(relx=0.01, rely=0.5)
+checkbtn_case = tk.Checkbutton(top_frame, text='Case-insensitive',
+                                     variable=check_case)
+checkbtn_case.place(relx=0.01, rely=0.5)
 
 
 r_btn_in_both = ttk.Radiobutton(top_frame, text='Search folders and files',
@@ -136,17 +139,20 @@ r_btn_in_both.place(relx=0.25, rely=0.4)
 r_btn_in_dir.place(relx=0.25, rely=0.5)
 r_btn_in_files.place(relx=0.25, rely=0.6)
 
-btn_browser = tk.Button(top_frame, text="Browse", font=("Arial, 14"), command=lambda: fun.select_path(where))
+btn_browser = tk.Button(top_frame, text="Browse", font=("Arial, 14"),
+                         command=lambda: fun.select_path(where))
 btn_browser.place(relx=0.875, rely=0.1, relheight=0.07, relwidth=0.1)
 
 
-lbl_results = tk.Label(bottom_frame, font=("Arial, 14"))
+lbl_results = tk.Label(bottom_frame, font="Arial, 14")
 lbl_results.place(relheight=0.1, relwidth=0.2, rely=0.89, relx=0.78)
 
-lbl_wait=tk.Label(bottom_frame, font=("Arial, 14"))
+lbl_wait=tk.Label(bottom_frame, font="Arial, 14")
 lbl_wait.place(relheight=0.1, relwidth=0.22, rely=0.89, relx=0.02)
 
-progressbar = ttk.Progressbar(bottom_frame, orient='horizontal',variable=bar)
+progressbar = ttk.Progressbar(bottom_frame, orient='horizontal', variable=var_for_bar)
+
+root.bind('<Return>', lambda event: fun.pressing_enter(event, btn_start))
 
 root.mainloop()
 
